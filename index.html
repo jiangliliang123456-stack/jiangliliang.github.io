@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈球帮篮球社团官方网站</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif;scroll-behavior:smooth;}
+        :root{
+            --main:#ff6700;
+            --black:#0f0f0f;
+            --white:#ffffff;
+            --gray:#f1f1f1;
+            --text:#333;
+        }
+        body.dark{
+            --black:#1e1e1e;
+            --white:#2d2d2d;
+            --gray:#383838;
+            --text:#e5e5e5;
+            background:#121212;
+        }
+        body{background:var(--white);color:var(--text);transition:all 0.3s ease;}
+        a{text-decoration:none;}
+        ul{list-style:none;}
+        .container{max-width:1250px;margin:0 auto;padding:0 20px;}
+        .title{text-align:center;font-size:36px;margin-bottom:60px;position:relative;}
+        .title::after{content:"";width:90px;height:4px;background:var(--main);position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;border-radius:2px;}
+
+        /* 导航栏 */
+        header{background:var(--black);position:sticky;top:0;z-index:999;box-shadow:0 2px 10px rgba(0,0,0,0.2);}
+        .nav-box{display:flex;justify-content:space-between;align-items:center;height:70px;}
+        .logo{font-size:28px;font-weight:bold;color:var(--main);letter-spacing:2px;}
+        .nav-menu{display:flex;gap:30px;}
+        .nav-menu a{color:#fff;font-size:16px;padding:8px 12px;border-radius:4px;transition:0.3s;}
+        .nav-menu a:hover{background:var(--main);color:#fff;}
+        .theme-switch{background:var(--main);border:none;color:#fff;padding:7px 15px;border-radius:5px;cursor:pointer;}
+
+        /* 首页轮播横幅 */
+        .banner{width:100%;height:85vh;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://img2.baidu.com/it/u=2953246321,2107559139&fm=253&fmt=auto);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;}
+        .banner-text h1{font-size:60px;margin-bottom:20px;text-shadow:0 3px 10px #000;}
+        .banner-text p{font-size:22px;margin-bottom:35px;letter-spacing:1px;}
+        .join-btn{padding:14px 40px;background:var(--main);color:#fff;font-size:18px;border-radius:50px;transition:0.3s;}
+        .join-btn:hover{background:#e05900;transform:translateY(-5px);box-shadow:0 8px 20px rgba(255,103,0,0.4);}
+
+        /* 社团简介 */
+        .about{padding:80px 0;background:var(--gray);}
+        .about-content{font-size:18px;line-height:2.2;text-align:center;max-width:1000px;margin:0 auto;}
+
+        /* 球队队员 */
+        .team{padding:80px 0;}
+        .team-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:35px;}
+        .team-item{background:var(--gray);border-radius:12px;overflow:hidden;transition:0.4s;box-shadow:0 4px 15px rgba(0,0,0,0.08);}
+        .team-item:hover{transform:translateY(-10px);}
+        .team-item img{width:100%;height:230px;object-fit:cover;}
+        .team-info{padding:25px;text-align:center;}
+        .team-info h3{font-size:20px;margin-bottom:8px;color:var(--main);}
+        .team-info p{font-size:15px;opacity:0.85;}
+
+        /* 训练赛程 */
+        .schedule{padding:80px 0;background:var(--gray);}
+        .schedule-box{background:var(--white);padding:30px;border-radius:12px;}
+        .schedule-item{padding:18px;margin:15px 0;border-left:5px solid var(--main);font-size:17px;}
+
+        /* 荣誉殿堂 */
+        .honor{padding:80px 0;}
+        .honor-wrap{display:flex;flex-wrap:wrap;gap:25px;justify-content:center;}
+        .honor-card{width:220px;padding:30px 15px;background:var(--gray);text-align:center;border-radius:10px;font-size:17px;font-weight:500;}
+
+        /* 活动相册 */
+        .album{padding:80px 0;background:var(--gray);}
+        .album-list{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+        .album-list img{width:100%;height:180px;object-fit:cover;border-radius:8px;transition:0.3s;}
+        .album-list img:hover{transform:scale(1.05);}
+
+        /* 新闻公告 */
+        .news{padding:80px 0;}
+        .news-item{padding:20px;border-bottom:1px solid #eee;margin-bottom:15px;}
+        .news-item h4{font-size:19px;margin-bottom:8px;color:var(--main);}
+        .news-item span{font-size:14px;color:#999;}
+
+        /* 招新报名表单 */
+        .sign{padding:80px 0;background:var(--gray);}
+        .sign-form{max-width:650px;margin:0 auto;background:var(--white);padding:40px;border-radius:12px;}
+        .form-input{width:100%;padding:14px;margin:12px 0;border:1px solid #ddd;border-radius:6px;font-size:16px;background:var(--gray);color:var(--text);}
+        .submit-btn{width:100%;padding:15px;background:var(--main);border:none;color:#fff;font-size:18px;border-radius:6px;cursor:pointer;}
+
+        /* 留言板块 */
+        .message{padding:80px 0;}
+        .msg-box{max-width:650px;margin:0 auto;}
+        .msg-textarea{width:100%;height:120px;padding:15px;border:1px solid #ddd;border-radius:6px;margin-bottom:15px;font-size:16px;background:var(--gray);color:var(--text);}
+
+        /* 联系我们 */
+        .contact{padding:80px 0;background:var(--gray);text-align:center;}
+        .contact p{font-size:18px;line-height:2.3;margin:8px 0;}
+
+        /* 底部 */
+        footer{background:var(--black);color:#fff;text-align:center;padding:40px 0;font-size:16px;}
+
+        /* 移动端适配 */
+        @media(max-width:768px){
+            .nav-menu{display:none;}
+            .banner-text h1{font-size:36px;}
+            .album-list{grid-template-columns:repeat(2,1fr);}
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<header>
+    <div class="container nav-box">
+        <div class="logo">哈球帮</div>
+        <ul class="nav-menu">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">社团简介</a></li>
+            <li><a href="#team">球队队员</a></li>
+            <li><a href="#schedule">训练赛程</a></li>
+            <li><a href="#honor">荣誉殿堂</a></li>
+            <li><a href="#album">活动相册</a></li>
+            <li><a href="#news">新闻公告</a></li>
+            <li><a href="#sign">招新报名</a></li>
+            <li><a href="#message">留言交流</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+        <button class="theme-switch" onclick="changeMode()">明暗切换</button>
+    </div>
+</header>
+
+<!-- 首页横幅 -->
+<section class="banner" id="home">
+    <div class="banner-text">
+        <h1>热血篮魂 逐梦赛场</h1>
+        <p>以热爱为翼，以篮球为伴，青春永不落幕</p>
+        <a href="#sign" class="join-btn">即刻加入社团</a>
+    </div>
+</section>
+
+<!-- 社团简介 -->
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="title">社团简介</h2>
+        <div class="about-content">
+            哈球帮篮球社成立多年，是校内极具影响力的体育竞技社团。社团秉持团结、拼搏、奋进、友善的运动精神，面向全校所有热爱篮球的同学开放。日常开展基础篮球教学、实战对抗训练、战术研讨、校内联赛、校际友谊赛、户外团建等多样活动。无论你是零基础篮球小白，还是征战赛场的实力球员，在这里都能找到志同道合的伙伴，提升球技，收获友谊，挥洒热血青春，共同奔赴热爱！
+        </div>
+    </div>
+</section>
+
+<!-- 球队主力队员 -->
+<section class="team" id="team">
+    <div class="container">
+        <h2 class="title">核心球队队员</h2>
+        <div class="team-list">
+            <div class="team-item">
+                <img src="https://picsum.photos/600/400?random=10">
+                <div class="team-info">
+                    <h3>社团社长 - 刘阳</h3>
+                    <p>司职：控球后卫 | 球场组织者</p>
+                </div>
+            </div>
+            <div class="team-item">
+                <img src="https://picsum.photos/600/400?random=11">
+                <div class="team-info">
+                    <h3>球队队长 - 张泽</h3>
+                    <p>司职：得分后卫 | 精准射手</p>
+                </div>
+            </div>
+            <div class="team-item">
+                <img src="https://picsum.photos/600/400?random=12">
+                <div class="team-info">
+                    <h3>内线主力 - 李浩</h3>
+                    <p>司职：中锋 | 篮下攻防核心</p>
+                </div>
+            </div>
+            <div class="team-item">
+                <img src="https://picsum.photos/600/400?random=13">
+                <div class="team-info">
+                    <h3>锋线球员 - 王宇</h3>
+                    <p>司职：小前锋 | 全能突破手</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 训练与赛事安排 -->
+<section class="schedule" id="schedule">
+    <div class="container">
+        <h2 class="title">日常训练 & 赛事安排</h2>
+        <div class="schedule-box">
+            <div class="schedule-item">周一 17:00-18:30 基础运球、传球、投篮专项训练</div>
+            <div class="schedule-item">周二 17:00-18:30 防守站位、卡位、抢断实战练习</div>
+            <div class="schedule-item">周四 17:00-19:00 团队战术配合、攻防演练</div>
+            <div class="schedule-item">周六 15:00-17:30 队内分组对抗赛</div>
+            <div class="schedule-item">每月下旬：校外兄弟学校友谊交流赛</div>
+            <div class="schedule-item">学期中：全校校园篮球争霸赛</div>
+        </div>
+    </div>
+</section>
+
+<!-- 荣誉殿堂 -->
+<section class="honor" id="honor">
+    <div class="container">
+        <h2 class="title">社团荣誉</h2>
+        <div class="honor-wrap">
+            <div class="honor-card">全校篮球联赛冠军</div>
+            <div class="honor-card">校级优秀体育社团</div>
+            <div class="honor-card">校园体育风尚标兵团队</div>
+            <div class="honor-card">区域中学生篮球赛季军</div>
+            <div class="honor-card">最佳集体竞技团队</div>
+        </div>
+    </div>
+</section>
+
+<!-- 活动相册 -->
+<section class="album" id="album">
+    <div class="container">
+        <h2 class="title">赛场风采相册</h2>
+        <div class="album-list">
+            <img src="https://picsum.photos/500/350?random=20">
+            <img src="https://picsum.photos/500/350?random=21">
+            <img src="https://picsum.photos/500/350?random=22">
+            <img src="https://picsum.photos/500/350?random=23">
+            <img src="https://picsum.photos/500/350?random=24">
+            <img src="https://picsum.photos/500/350?random=25">
+            <img src="https://picsum.photos/500/350?random=26">
+            <img src="https://picsum.photos/500/350?random=27">
+        </div>
+    </div>
+</section>
+
+<!-- 新闻公告 -->
+<section class="news" id="news">
+    <div class="container">
+        <h2 class="title">社团新闻公告</h2>
+        <div class="news-item">
+            <h4>2026春季学期社团招新正式开启</h4>
+            <span>发布时间：2026-05-13</span>
+            <p>本学期哈球帮篮球社全面开放招新，不限年级不限基础，欢迎全体同学踊跃报名加入！</p>
+        </div>
+        <div class="news-item">
+            <h4>下周将举办校内班级篮球友谊赛</h4>
+            <span>发布时间：2026-05-10</span>
+            <p>社团牵头组织全校班级篮球赛，有意向参赛队伍可提前报名登记。</p>
+        </div>
+        <div class="news-item">
+            <h4>周末户外篮球团建活动通知</h4>
+            <span>发布时间：2026-05-08</span>
+            <p>本周六组织社员户外打球团建，增进社员之间交流互动。</p>
+        </div>
+    </div>
+</section>
+
+<!-- 在线招新报名 -->
+<section class="sign" id="sign">
+    <div class="container">
+        <h2 class="title">新生在线报名</h2>
+        <form class="sign-form">
+            <input type="text" class="form-input" placeholder="请填写你的姓名">
+            <input type="text" class="form-input" placeholder="填写所在班级/年级">
+            <input type="text" class="form-input" placeholder="填写联系QQ/手机号">
+            <select class="form-input">
+                <option>选择意向球场位置</option>
+                <option>控球后卫</option>
+                <option>得分后卫</option>
+                <option>小前锋</option>
+                <option>大前锋</option>
+                <option>中锋</option>
+                <option>暂无固定位置</option>
+            </select>
+            <textarea class="form-input" rows="4" placeholder="简单说说你的打球时长、篮球爱好与特长"></textarea>
+            <button type="button" class="submit-btn">提交报名信息</button>
+        </form>
+    </div>
+</section>
+
+<!-- 留言交流区 -->
+<section class="message" id="message">
+    <div class="container">
+        <h2 class="title">社员留言交流</h2>
+        <div class="msg-box">
+            <textarea class="msg-textarea" placeholder="在这里留下你的想法、约球信息、篮球心得~"></textarea>
+            <button class="submit-btn">发布留言</button>
+        </div>
+    </div>
+</section>
+
+<!-- 联系我们 -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="title">联系我们</h2>
+        <p>社团负责人</p>
+        <p>联系电话：13301189660</p>
+        <p>社团招新QQ群：520131488</p>
+        <p>日常活动场地：学校室内体育馆、室外标准篮球场</p>
+        <p>社团官方邮箱：basketball_she@163.com</p>
+    </div>
+</section>
+
+<!-- 底部版权 -->
+<footer>
+    <p>© 2026 哈球帮 版权所有 官方网站</p>
+    <p style="margin-top:12px;">热爱不息，篮球不止，并肩同行共赴赛场</p>
+</footer>
+
+<script>
+// 明暗模式切换
+function changeMode(){
+    document.body.classList.toggle("dark");
+}
+</script>
+</body>
+</html>
